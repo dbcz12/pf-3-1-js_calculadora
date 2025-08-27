@@ -1,4 +1,4 @@
-// Calculadora básica interactiva
+// Calculadora simple para principiantes
 
 // Función para sumar
 function sumar(a, b) {
@@ -17,139 +17,58 @@ function multiplicar(a, b) {
 
 // Función para dividir
 function dividir(a, b) {
-    if (b === 0) {
-        return "Error: División por cero";
+    if (b == 0) {
+        return "No se puede dividir por cero";
     }
     return a / b;
 }
 
-// Función para mostrar el menú de opciones
-function mostrarMenu() {
-    console.log("1. Sumar (+)");
-    console.log("2. Restar (-)");
-    console.log("3. Multiplicar (*)");
-    console.log("4. Dividir (/)");
-    console.log("5. Salir");
-}
-
 // Función principal de la calculadora
 function calculadora() {
-  
-    let continuar = true;
+    // Mostrar el menú de opciones
+    var opcion = prompt("¿Qué operación quieres hacer?\n1 - Sumar\n2 - Restar\n3 - Multiplicar\n4 - Dividir\nEscribe el número de tu opción:");
     
-    while (continuar) {
-        mostrarMenu();
-        
-        // Pedir opción al usuario
-        const opcion = prompt("Selecciona una opción valida:\n 1. Sumar (+)\n 2. Restar (-)\n 3. Multiplicar (*)\n 4. Dividir (/)\n 5. Salir");
-        
-        switch (opcion) {
-            case '1':
-                console.log("\n--- SUMA ---");
-                const num1Suma = parseFloat(prompt("Ingresa el primer número: "));
-                const num2Suma = parseFloat(prompt("Ingresa el segundo número: "));
-                
-                if (isNaN(num1Suma) || isNaN(num2Suma)) {
-                    alert("Error: Por favor ingresa números válidos");
-                    console.log("Error: Por favor ingresa números válidos");
-                } else {
-                    const resultadoSuma = sumar(num1Suma, num2Suma);
-                    alert(`Resultado: ${num1Suma} + ${num2Suma} = ${resultadoSuma}`);
-                    console.log(`Resultado: ${num1Suma} + ${num2Suma} = ${resultadoSuma}`);
-                }
-                break;
-                
-            case '2':
-                console.log("\n--- RESTA ---");
-                const num1Resta = parseFloat(prompt("Ingresa el primer número: "));
-                const num2Resta = parseFloat(prompt("Ingresa el segundo número: "));
-                
-                if (isNaN(num1Resta) || isNaN(num2Resta)) {
-                    alert("Error: Por favor ingresa números válidos");
-                    console.log("Error: Por favor ingresa números válidos");
-                } else {
-                    const resultadoResta = restar(num1Resta, num2Resta);
-                    alert(`Resultado: ${num1Resta} - ${num2Resta} = ${resultadoResta}`);
-                    console.log(`Resultado: ${num1Resta} - ${num2Resta} = ${resultadoResta}`);
-                }
-                break;
-                
-            case '3':
-                console.log("\n--- MULTIPLICACIÓN ---");
-                const num1Mult = parseFloat(prompt("Ingresa el primer número: "));
-                const num2Mult = parseFloat(prompt("Ingresa el segundo número: "));
-                
-                if (isNaN(num1Mult) || isNaN(num2Mult)) {
-                    alert("Error: Por favor ingresa números válidos");
-                    console.log("Error: Por favor ingresa números válidos");
-                } else {
-                    const resultadoMult = multiplicar(num1Mult, num2Mult);
-                    alert(`Resultado: ${num1Mult} * ${num2Mult} = ${resultadoMult}`);
-                    console.log(`Resultado: ${num1Mult} * ${num2Mult} = ${resultadoMult}`);
-                }
-                break;
-                
-            case '4':
-                console.log("\n--- DIVISIÓN ---");
-                const num1Div = parseFloat(prompt("Ingresa el primer número: "));
-                const num2Div = parseFloat(prompt("Ingresa el segundo número: "));
-                
-                if (isNaN(num1Div) || isNaN(num2Div)) {
-                    alert("Error: Por favor ingresa números válidos");
-                    console.log("Error: Por favor ingresa números válidos");
-                } else {
-                    const resultadoDiv = dividir(num1Div, num2Div);
-                    alert(`Resultado: ${num1Div} / ${num2Div} = ${resultadoDiv}`);
-                    console.log(`Resultado: ${num1Div} / ${num2Div} = ${resultadoDiv}`);
-                }
-                break;
-                
-            case '5':
-                alert("¡Gracias por usar la calculadora!");
-                console.log("¡Gracias por usar la calculadora!");
-                continuar = false;
-                break;
-                
-            default:
-                alert("Opción no válida. Por favor selecciona una opción del 1 al 5.");
-                console.log("Opción no válida. Por favor selecciona una opción del 1 al 5.");
-                break;
+    // Pedir el primer número
+    var numero1 = prompt("Escribe el primer número:");
+    numero1 = parseFloat(numero1);
+    
+    // Pedir el segundo número
+    var numero2 = prompt("Escribe el segundo número:");
+    numero2 = parseFloat(numero2);
+    
+    var resultado;
+    var operacion;
+    
+    // Usar if para decidir qué operación hacer
+    if (opcion == "1") {
+        resultado = sumar(numero1, numero2);
+        operacion = numero1 + " + " + numero2 + " = " + resultado;
+    } else if (opcion == "2") {
+        resultado = restar(numero1, numero2);
+        operacion = numero1 + " - " + numero2 + " = " + resultado;
+    } else if (opcion == "3") {
+        resultado = multiplicar(numero1, numero2);
+        operacion = numero1 + " × " + numero2 + " = " + resultado;
+    } else if (opcion == "4") {
+        resultado = dividir(numero1, numero2);
+        if (resultado == "No se puede dividir por cero") {
+            operacion = "Error: " + resultado;
+        } else {
+            operacion = numero1 + " ÷ " + numero2 + " = " + resultado;
         }
+    } else {
+        operacion = "Opción no válida. Debes elegir 1, 2, 3 o 4";
+        resultado = "Error";
     }
+    
+    // Mostrar el resultado en la consola
+    console.log(operacion);
+    
+    // Mostrar el resultado en un alert
+    alert(operacion);
+    
+    return resultado;
 }
 
-export function addTwoNumbers(num1, num2, op = "+") {
-    switch (op) {
-        case '+': {
-            const r = sumar(num1, num2);
-            console.log(`Resultado: ${num1} + ${num2} = ${r}`);
-            return r;
-        }
-        case '-': {
-            const r = restar(num1, num2);
-            console.log(`Resultado: ${num1} - ${num2} = ${r}`);
-            return r;
-        }
-        case '*': {
-            const r = multiplicar(num1, num2);
-            console.log(`Resultado: ${num1} * ${num2} = ${r}`);
-            return r;
-        }
-        case '/': {
-            const r = dividir(num1, num2);
-            console.log(`Resultado: ${num1} / ${num2} = ${r}`);
-            return r;
-        }
-        default:
-            console.log("Operación no válida");
-            return "Operación no válida";
-    }
-}
-
-// Exportar funciones para testing
-export { sumar, restar, multiplicar, dividir };
-
-// Solo ejecutar calculadora si prompt está disponible (navegador)
-if (typeof prompt !== 'undefined') {
-    calculadora();
-}
+// Llamar a la función para que se ejecute
+calculadora();
